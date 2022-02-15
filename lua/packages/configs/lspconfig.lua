@@ -180,7 +180,6 @@ for _, lsp in pairs(servers) do
         }
 end
 
-
 require("clangd_extensions").setup {
         server = {
                 capabilities = capabilities,
@@ -190,66 +189,111 @@ require("clangd_extensions").setup {
                 debounce_text_changes = 150,
                 },
         },
-        -- extensions = {
-        --         -- defaults:
-        --         -- Automatically set inlay hints (type hints)
-        --         autoSetHints = true,
-        --         -- Whether to show hover actions inside the hover window
-        --         -- This overrides the default hover handler
-        --         hover_with_actions = true,
-        --         -- These apply to the default ClangdSetInlayHints command
-        --         inlay_hints = {
-        --         -- Only show inlay hints for the current line
-        --         only_current_line = false,
-        --         -- Event which triggers a refersh of the inlay hints.
-        --         -- You can make this "CursorMoved" or "CursorMved,CursorMovedI" but
-        --         -- not that this may cause  higher CPU usage.
-        --         -- This option is only respected when only_current_line and
-        --         -- autoSetHints both are true.
-        --         only_current_line_autocmd = "CursorHold",
-        --         -- whether to show parameter hints with the inlay hints or not
-        --         show_parameter_hints = true,
-        --         -- whether to show variable name before type hints with the inlay hints or not
-        --         show_variable_name = true,
-        --         -- prefix for parameter hints
-        --         parameter_hints_prefix = "<- ",
-        --         -- prefix for all the other hints (type, chaining)
-        --         other_hints_prefix = "=> ",
-        --         -- whether to align to the length of the longest line in the file
-        --         max_len_align = false,
-        --         -- padding from the left if max_len_align is true
-        --         max_len_align_padding = 1,
-        --         -- whether to align to the extreme right or not
-        --         right_align = false,
-        --         -- padding from the right if right_align is true
-        --         right_align_padding = 7,
-        --         -- The color of the hints
-        --         highlight = "Comment",
-        --         },
-        --         ast = {
-        --                 role_icons = {
-        --                         type = "",
-        --                         declaration = "",
-        --                         expression = "",
-        --                         specifier = "",
-        --                         statement = "",
-        --                         ["template argument"] = "",
-        --                 },
-        --
-        --                 kind_icons = {
-        --                         Compound = "",
-        --                         Recovery = "",
-        --                         TranslationUnit = "",
-        --                         PackExpansion = "",
-        --                         TemplateTypeParm = "",
-        --                         TemplateTemplateParm = "",
-        --                         TemplateParamObject = "",
-        --                 },
-        --
-        --                 highlights = {
-        --                         detail = "Comment",
-        --                 },
-        --         }
-        -- }
+        extensions = {
+                -- defaults:
+                -- Automatically set inlay hints (type hints)
+                autoSetHints = true,
+                -- Whether to show hover actions inside the hover window
+                -- This overrides the default hover handler
+                hover_with_actions = true,
+                -- These apply to the default ClangdSetInlayHints command
+                inlay_hints = {
+                -- Only show inlay hints for the current line
+                only_current_line = false,
+                -- Event which triggers a refersh of the inlay hints.
+                -- You can make this "CursorMoved" or "CursorMved,CursorMovedI" but
+                -- not that this may cause  higher CPU usage.
+                -- This option is only respected when only_current_line and
+                -- autoSetHints both are true.
+                only_current_line_autocmd = "CursorHold",
+                -- whether to show parameter hints with the inlay hints or not
+                show_parameter_hints = true,
+                -- whether to show variable name before type hints with the inlay hints or not
+                show_variable_name = true,
+                -- prefix for parameter hints
+                parameter_hints_prefix = "<- ",
+                -- prefix for all the other hints (type, chaining)
+                other_hints_prefix = "=> ",
+                -- whether to align to the length of the longest line in the file
+                max_len_align = false,
+                -- padding from the left if max_len_align is true
+                max_len_align_padding = 1,
+                -- whether to align to the extreme right or not
+                right_align = false,
+                -- padding from the right if right_align is true
+                right_align_padding = 7,
+                -- The color of the hints
+                highlight = "Comment",
+                },
+                ast = {
+                        role_icons = {
+                                type = "",
+                                declaration = "",
+                                expression = "",
+                                specifier = "",
+                                statement = "",
+                                ["template argument"] = "",
+                        },
+
+                        kind_icons = {
+                                Compound = "",
+                                Recovery = "",
+                                TranslationUnit = "",
+                                PackExpansion = "",
+                                TemplateTypeParm = "",
+                                TemplateTemplateParm = "",
+                                TemplateParamObject = "",
+                        },
+
+                        highlights = {
+                                detail = "Comment",
+                        },
+                }
+        }
+}
+
+
+-- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
+USER = vim.fn.expand('$USER')
+
+local sumneko_root_path = ""
+local sumneko_binary = ""
+
+if vim.fn.has("mac") == 1 then
+    sumneko_root_path = "/Users/" .. USER .. "/.config/nvim/lua-language-server"
+    sumneko_binary = "/Users/" .. USER .. "/.config/nvim/lua-language-server/bin/lua-language-server"
+elseif vim.fn.has("unix") == 1 then
+    sumneko_root_path = "/home/" .. USER .. "/.config/nvim/lua-language-server"
+    sumneko_binary = "/home/" .. USER .. "/.config/nvim/lua-language-server/bin/Linux/lua-language-server"
+else
+    print("Unsupported system for sumneko")
+end
+
+require'lspconfig'.sumneko_lua.setup {
+        cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+        settings = {
+                capabilities = capabilities,
+                on_attach = on_attach,
+                flags = {
+                -- This will be the default in neovim 0.7+
+                debounce_text_changes = 150,
+                },
+                Lua = {
+                        runtime = {
+                                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                                version = 'LuaJIT',
+                                -- Setup your lua path
+                                path = vim.split(package.path, ';')
+                        },
+                        diagnostics = {
+                                -- Get the language server to recognize the `vim` global
+                                globals = {'vim'}
+                        },
+                        workspace = {
+                                -- Make the server aware of Neovim runtime files
+                                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+                        }
+                }
+        }
 }
 --}}}

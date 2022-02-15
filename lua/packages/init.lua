@@ -279,7 +279,7 @@ return packer.startup(function(use)--{{{
 
         use {
                 'nvim-lualine/lualine.nvim',--{{{
-                requires = {{'nvim-lua/lsp-status.nvim', }, { 'kyazdani42/nvim-web-devicons', }, },
+                requires = {--[[ {'nvim-lua/lsp-status.nvim', }, ]] { 'kyazdani42/nvim-web-devicons', }, },
                 config = function()
                         require('lualine').setup({
                         options = {
@@ -426,9 +426,9 @@ return packer.startup(function(use)--{{{
 
         use {
                 'rcarriga/nvim-notify',--{{{
-                requires = {{'nvim-lua/plenary.nvim'},},
+                -- requires = {{'nvim-lua/plenary.nvim'},},
                 config = function()
-                        require "packages.configs.notify"
+                        require "packages.configs.snotify"
                 end
 
         }--}}}
@@ -452,7 +452,7 @@ return packer.startup(function(use)--{{{
         use {
                 "steelsojka/pears.nvim",--{{{
                 -- opt = true,
-                evnet = {"InsertEnter", "VimEnter", },
+                -- evnet = {"InsertEnter", "VimEnter", },
                 config = function()
                         require "pears".setup()
                 end,
@@ -529,8 +529,8 @@ return packer.startup(function(use)--{{{
         -- LSP{{{
         -- 客户端，自动补全
         use {
-                'p00f/clangd_extensions.nvim',
-        }
+                'p00f/clangd_extensions.nvim',--{{{
+        }--}}}
 
         use {
                 'neovim/nvim-lspconfig',--{{{
@@ -555,6 +555,22 @@ return packer.startup(function(use)--{{{
         }
 
         --}}}
+        --
+        use {
+                'williamboman/nvim-lsp-installer',
+                config = function()
+                        require("nvim-lsp-installer").settings({
+                                ui = {
+                                        icons = {
+                                        server_installed = "✓",
+                                        server_pending = "➜",
+                                        server_uninstalled = "✗"
+                                        },
+                                },
+                        })
+
+                end
+        }
 
         -- }}}
 
