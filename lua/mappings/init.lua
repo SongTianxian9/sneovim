@@ -40,3 +40,23 @@ map('n', '<Leader><Leader>hl', "<cmd>lua require'hop'.hint_line_start()<CR>", mn
 
 -- 文件浏览
 map('n', '<C-n>', ':NvimTreeToggle<CR>', mns)
+-- local tree ={}
+-- tree.open = function ()
+--    require'bufferline.state'.set_offset(31, 'FileTree')
+--    require'nvim-tree'.find_file(true)
+-- end
+--
+-- tree.close = function ()
+--    require'bufferline.state'.set_offset(0)
+--    require'nvim-tree'.close()
+-- end
+--
+-- vim.cmd [[
+-- augroup
+-- 	au!
+-- 	au FileType * nnoremap n <C-n> :lua tree.open()<cr>
+-- 	au FileType NvimTree nnoremap n <C-n> :lua tree.close()<cr>
+-- augroup END
+-- ]]
+--
+-- return tree

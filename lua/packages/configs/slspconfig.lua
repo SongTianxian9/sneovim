@@ -49,6 +49,11 @@ require("luasnip.loaders.from_snipmate").load()
 -- lspkind-nvim setup
 local lspkind = require('lspkind')
 
+local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
@@ -120,6 +125,7 @@ cmp.setup {
                         -- { name = 'snippy' }, -- For snippy users.
                 }, {
                         { name = 'buffer' },
+			{ name = 'orgmode'},
         }),
 
         formatting = {
@@ -135,9 +141,10 @@ cmp.setup {
                 })
         },
 }
+
   cmp.setup.filetype('gitcommit', {
         sources = cmp.config.sources({
-                { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it. 
+                { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
         }, {
                 { name = 'buffer' },
         })
@@ -168,7 +175,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', }
+local servers = { 'vimls', 'pyright', 'rust_analyzer', }
 for _, lsp in pairs(servers) do
         lspconfig[lsp].setup {
                 capabilities = capabilities,

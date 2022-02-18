@@ -1,6 +1,6 @@
 require("notify").setup({
         -- -- Animation style (see below for details)
-        -- stages = "slide",
+        stages = "fade",
         -- -- Function called when a new window is opened, use for changing win settings/config
         -- on_open = nil,
         -- -- Function called when a window is closed
@@ -10,15 +10,15 @@ require("notify").setup({
         -- -- Default timeout for notifications
         -- timeout = 5000,
         -- -- Max number of columns for messages
-        -- max_width = 80,
+        max_width = 80,
         -- -- Max number of lines for a message
         -- max_height = nil,
         -- -- For stages that change opacity this is treated as the highlight behind the window
         -- -- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
-        -- background_colour = "Normal",
+        background_colour = "Normal",
         --
         -- -- Minimum width for notification windows
-        -- minimum_width = 50,
+        minimum_width = 60,
         --
         -- -- Icons for the different levels
         icons = {
@@ -31,18 +31,18 @@ require("notify").setup({
 })
 
 vim.notify = require("notify")
+-- vim.notify("\t\t快乐学习，你能行！！！\n\t\t加油宋天祥！！！", "info", {title = "With great power comes great responsibility",})
+local async = require("plenary.async")
+local notify = require("notify").async
 
--- local async = require("plenary.async")
--- local notify = require("notify").async
---
--- async.run(function()
---         if #vim.lsp.buf_get_clients(0) > 0 then
---                 notify("Lsp 已正常加载", "info", {title = "Lsp 状态：", timeout = 3000}).close()
---         else
---                 notify("Lsp 没能加载, 快去看下哪有问题", "warn", {title = "Lsp 状态：", timeout = 6000}).close()
---         end
---         notify("\t\t快乐学习，你能行！！！\n\t\t加油宋天祥！！！", "info", {title = "With great power comes great responsibility",})
--- end)
+async.run(function()
+        notify("\t\t快乐学习，你能行！！！\n\t\t加油宋天祥！！！", "info", {title = "With great power comes great responsibility    ",}).close()
+        if #vim.lsp.buf_get_clients() > 0 then
+                notify("Lsp 已正常加载", "info", {title = "Lsp 状态：", timeout = 3000}).close()
+        else
+                notify("Lsp 没能加载, 快去看下哪有问题", "warn", {title = "Lsp 状态：", timeout = 6000}).close()
+        end
+end)
 
 -- local client_notifs = {}
 --
