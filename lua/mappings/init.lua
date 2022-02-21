@@ -40,6 +40,8 @@ map('n', '<Leader><Leader>hl', "<cmd>lua require'hop'.hint_line_start()<CR>", mn
 
 -- 文件浏览
 map('n', '<C-n>', ':NvimTreeToggle<CR>', mns)
+map('n', '<C-s>', ':SymbolsOutline<CR>', mns)
+map('n', '<leader>v', ':Vista!!<CR>', mns)
 -- local tree ={}
 -- tree.open = function ()
 --    require'bufferline.state'.set_offset(31, 'FileTree')
@@ -60,3 +62,10 @@ map('n', '<C-n>', ':NvimTreeToggle<CR>', mns)
 -- ]]
 --
 -- return tree
+--
+--
+--
+--
+-- zomm
+-- if you use `<CR>` as toggle, then you should handle when to fallback yourself so it won't intercept the plain-old `<CR>`.
+vim.api.nvim_set_keymap('n', '<CR>', '<cmd>NeoZoomToggle<CR>', { noremap=true, silent=true, nowait=true })

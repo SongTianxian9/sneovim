@@ -32,17 +32,17 @@ require("notify").setup({
 
 vim.notify = require("notify")
 -- vim.notify("\t\t快乐学习，你能行！！！\n\t\t加油宋天祥！！！", "info", {title = "With great power comes great responsibility",})
-local async = require("plenary.async")
-local notify = require("notify").async
+-- local async = require("plenary.async")
+-- local notify = require("notify").async
 
-async.run(function()
-        notify("\t\t快乐学习，你能行！！！\n\t\t加油宋天祥！！！", "info", {title = "With great power comes great responsibility    ",}).close()
-        if #vim.lsp.buf_get_clients() > 0 then
-                notify("Lsp 已正常加载", "info", {title = "Lsp 状态：", timeout = 3000}).close()
-        else
-                notify("Lsp 没能加载, 快去看下哪有问题", "warn", {title = "Lsp 状态：", timeout = 6000}).close()
-        end
-end)
+-- async.run(function()
+--         notify("\t\t快乐学习，你能行！！！\n\t\t加油宋天祥！！！", "info", {title = "With great power comes great responsibility    ",}).close()
+--         if #vim.lsp.buf_get_clients() > 0 then
+--                 notify("Lsp 已正常加载", "info", {title = "Lsp 状态：", timeout = 3000}).close()
+--         else
+--                 notify("Lsp 没能加载, 快去看下哪有问题", "warn", {title = "Lsp 状态：", timeout = 6000}).close()
+--         end
+-- end)
 
 -- local client_notifs = {}
 --

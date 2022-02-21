@@ -34,6 +34,7 @@ o.autochdir = true
 o.whichwrap = "b,s,<,>,h,l"
 o.completeopt = {"menu", "menuone", "noselect"}
 o.mouse = "a"
+o.shortmess:append({ I = true })
 vim.cmd[[
 
 " set guifont="Firacode\Nerd\Font\ Mono\Retina:h14"
@@ -51,12 +52,12 @@ g.mapleader = ";"
 -- buffet
 vim.cmd [[
 function! g:BuffetSetCustomColors()
-  hi! BuffetTab gui=bold,italic guibg=#315f72 guifg=#7a2048
-  hi! BuffetCurrentBuffer gui=italic,undercurl guibg=#282c34  guifg=#98c379
-  hi! BuffetModCurrentBuffer gui=italic,undercurl guibg=#282c34 guifg=#61afef
-  hi! BuffetActiveBuffer gui=bold  guibg=#282c34  guifg=#98c379
-  hi! BuffetBuffer gui=bold  guibg=#6883bc guifg=#282c34
-  " hi! BuffetTrunc guibg=#e45649 guifg=#e45649 6883bc
+  hi! BuffetTab gui=bold,italic guibg=#851e3e guifg=#ffc425
+  hi! BuffetCurrentBuffer gui=bold,italic,undercurl guibg=#282c34  guifg=#6fffe9
+  hi! BuffetModCurrentBuffer gui=bold,italic,undercurl guibg=#282c34 guifg=#d62828
+  hi! BuffetActiveBuffer gui=bold  guibg=#282c34  guifg=#ed6e5a
+  hi! BuffetBuffer gui=bold  guibg=#5c374c guifg=#ed6e5a
+  " hi! BuffetTrunc guibg=#e45649 guifg=#e45649 6883bc 315f72 7a2048
 endfunction
 ]]
 
@@ -64,5 +65,5 @@ g.neovide_no_idle = true
 g.neovide_fullscreen = true
 g.neovide_remember_window_siez = true
 g.neovide_input_use_logo = true
-g.neovide_cursor_animation_length = 0.48
+g.neovide_cursor_animation_length = 0.29
 g.neovide_cursor_vxf_mode = "railgun"

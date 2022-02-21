@@ -342,7 +342,7 @@ return packer.startup(function(use)--{{{
                                 lualine_a = {'mode'},
                                 lualine_b = {'branch', 'diff', 'diagnostics'},
                                 lualine_c = {'filename', --[[ {function() return require('lsp-status').status() end} ,]] },
-                                lualine_x = {--[[ 'encoding', 'fileformat', ]] 'filetype'},
+                                lualine_x = {--[[ 'encoding', 'fileformat', ]]--[[ 'vista_nearest_method_or_function' ]]--[[ {function () return vim.fn.NearestMethodOrFunction() end} ]] 'filetype'},
                                 lualine_y = {'progress'},
                                 lualine_z = {'location'}
                         },
@@ -367,50 +367,50 @@ return packer.startup(function(use)--{{{
         --         end,
         -- }--}}}
         --
-	--[[ use {
-		'romgrk/barbar.nvim',--{{{
-		requires = {'kyazdani42/nvim-web-devicons'},
-		config = function ()
-			local map = vim.api.nvim_set_keymap
-			local opts = { noremap = true, silent = true }
-
-			-- Move to previous/next
-			map('n', '<A-p>', ':BufferPrevious<CR>', opts)
-			map('n', '<A-n>', ':BufferNext<CR>', opts)
-			-- Re-order to previous/next
-			map('n', '<A-P>', ':BufferMovePrevious<CR>', opts)
-			map('n', '<A-N>', ' :BufferMoveNext<CR>', opts)
-			-- Goto buffer in position...
-			map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
-			map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
-			map('n', '<A-3>', ':BufferGoto 3<CR>', opts)
-			map('n', '<A-4>', ':BufferGoto 4<CR>', opts)
-			map('n', '<A-5>', ':BufferGoto 5<CR>', opts)
-			map('n', '<A-6>', ':BufferGoto 6<CR>', opts)
-			map('n', '<A-7>', ':BufferGoto 7<CR>', opts)
-			map('n', '<A-8>', ':BufferGoto 8<CR>', opts)
-			map('n', '<A-9>', ':BufferGoto 9<CR>', opts)
-			map('n', '<A-0>', ':BufferLast<CR>', opts)
-			-- Close buffer
-			map('n', '<A-c>', ':BufferClose<CR>', opts)
-			-- Wipeout buffer
-			--                 :BufferWipeout<CR>
-			-- Close commands
-			--                 :BufferCloseAllButCurrent<CR>
-			--                 :BufferCloseBuffersLeft<CR>
-			--                 :BufferCloseBuffersRight<CR>
-			-- Magic buffer-picking mode
-			map('n', '<M-j>', ':BufferPick<CR>', opts)
-			-- Sort automatically by...
-			map('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', opts)
-			map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
-			map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
-
-			-- Other:
-			-- :BarbarEnable - enables barbar (enabled by default)
-			-- :BarbarDisable - very bad command, should never be used
-		end
-	}--}}} ]]
+	-- use {
+	-- 	'romgrk/barbar.nvim',--{{{
+	-- 	requires = {'kyazdani42/nvim-web-devicons'},
+	-- 	config = function ()
+	-- 		local map = vim.api.nvim_set_keymap
+	-- 		local opts = { noremap = true, silent = true }
+	--
+	-- 		-- Move to previous/next
+	-- 		map('n', '<A-p>', ':BufferPrevious<CR>', opts)
+	-- 		map('n', '<A-n>', ':BufferNext<CR>', opts)
+	-- 		-- Re-order to previous/next
+	-- 		map('n', '<A-P>', ':BufferMovePrevious<CR>', opts)
+	-- 		map('n', '<A-N>', ' :BufferMoveNext<CR>', opts)
+	-- 		-- Goto buffer in position...
+	-- 		map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
+	-- 		map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
+	-- 		map('n', '<A-3>', ':BufferGoto 3<CR>', opts)
+	-- 		map('n', '<A-4>', ':BufferGoto 4<CR>', opts)
+	-- 		map('n', '<A-5>', ':BufferGoto 5<CR>', opts)
+	-- 		map('n', '<A-6>', ':BufferGoto 6<CR>', opts)
+	-- 		map('n', '<A-7>', ':BufferGoto 7<CR>', opts)
+	-- 		map('n', '<A-8>', ':BufferGoto 8<CR>', opts)
+	-- 		map('n', '<A-9>', ':BufferGoto 9<CR>', opts)
+	-- 		map('n', '<A-0>', ':BufferLast<CR>', opts)
+	-- 		-- Close buffer
+	-- 		map('n', '<A-c>', ':BufferClose<CR>', opts)
+	-- 		-- Wipeout buffer
+	-- 		--                 :BufferWipeout<CR>
+	-- 		-- Close commands
+	-- 		--                 :BufferCloseAllButCurrent<CR>
+	-- 		--                 :BufferCloseBuffersLeft<CR>
+	-- 		--                 :BufferCloseBuffersRight<CR>
+	-- 		-- Magic buffer-picking mode
+	-- 		map('n', '<M-j>', ':BufferPick<CR>', opts)
+	-- 		-- Sort automatically by...
+	-- 		map('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', opts)
+	-- 		map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
+	-- 		map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
+	--
+	-- 		-- Other:
+	-- 		-- :BarbarEnable - enables barbar (enabled by default)
+	-- 		-- :BarbarDisable - very bad command, should never be used
+	-- 	end
+	-- }--}}}
 
 	use {
 		'akinsho/bufferline.nvim',--{{{
@@ -472,7 +472,7 @@ return packer.startup(function(use)--{{{
 				-- 	return true
 				-- end
 				-- end,
-				offsets = {{filetype = "NvimTree", text = "又要打开啥文件 🙄" , text_align = --[[ "left" | "center" |  ]]"right"}},
+				offsets = {{filetype = "NvimTree", text = "早点休息 🙄" , text_align = --[[ "left" | "center" |  ]]"right"}},
 				show_buffer_icons = true , -- disable filetype icons for buffers
 				show_buffer_close_icons = true ,
 				show_close_icon = true ,
@@ -582,54 +582,54 @@ return packer.startup(function(use)--{{{
                 end
         }--}}}
 
-	use {
-		'glepnir/dashboard-nvim',
-		config = function ()
-			vim.cmd [[
-				let g:dashboard_default_executive ='telescope'
-				nmap <Leader>ss :<C-u>SessionSave<CR>
-				nmap <Leader>sl :<C-u>SessionLoad<CR>
-				nnoremap <silent> <Leader>dh :DashboardFindHistory<CR>
-				nnoremap <silent> <Leader>df :DashboardFindFile<CR>
-				nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-				nnoremap <silent> <Leader>da :DashboardFindWord<CR>
-				nnoremap <silent> <Leader>dm :DashboardJumpMark<CR>
-				nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
-				" autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
-				let g:dashboard_custom_header = [
-					\'',
-					\'⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣤⣴⣦⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ',
-					\'⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⠿⠿⠿⠿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀ ',
-					\'⠀⠀⠀⠀⣠⣾⣿⣿⡿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⢿⣿⣿⣶⡀⠀⠀⠀⠀ ',
-					\'⠀⠀⠀⣴⣿⣿⠟⠁⠀⠀⠀⣶⣶⣶⣶⡆⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣦⠀⠀⠀ ',
-					\'⠀⠀⣼⣿⣿⠋⠀⠀⠀⠀⠀⠛⠛⢻⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣧⠀⠀ ',
-					\'⠀⢸⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⡇⠀ ',
-					\'⠀⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⠀ ',
-					\'⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⡟⢹⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⣹⣿⣿⠀ ',
-					\'⠀⣿⣿⣷⠀⠀⠀⠀⠀⠀⣰⣿⣿⠏⠀⠀⢻⣿⣿⡄⠀⠀⠀⠀⠀⠀⣿⣿⡿⠀ ',
-					\'⠀⢸⣿⣿⡆⠀⠀⠀⠀⣴⣿⡿⠃⠀⠀⠀⠈⢿⣿⣷⣤⣤⡆⠀⠀⣰⣿⣿⠇⠀ ',
-					\'⠀⠀⢻⣿⣿⣄⠀⠀⠾⠿⠿⠁⠀⠀⠀⠀⠀⠘⣿⣿⡿⠿⠛⠀⣰⣿⣿⡟⠀⠀ ',
-					\'⠀⠀⠀⠻⣿⣿⣧⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⠏⠀⠀⠀ ',
-					\'⠀⠀⠀⠀⠈⠻⣿⣿⣷⣤⣄⡀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⠟⠁⠀⠀⠀⠀ ',
-					\'⠀⠀⠀⠀⠀⠀⠈⠛⠿⣿⣿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⠿⠋⠁⠀⠀⠀⠀⠀⠀ ',
-					\'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠛⠛⠛⠛⠛⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ',
-					\]
-
-			]]
-				-- vim.g.dashboard_preview_command = 'cat'
-				-- vim.g.dashboard_preview_pipeline = 'lolcat'
-				-- vim.g.dashboard_preview_file = "~/.config/nvim/dashboard/cat.cat"
-				-- vim.g.dashboard_preview_file_height = 12
-				-- vim.g.dashboard_preview_file_width = 80
-		end,
-	}
+	-- use {
+	-- 	'glepnir/dashboard-nvim',--{{{
+	-- 	config = function ()
+	-- 		vim.cmd [[
+	-- 			let g:dashboard_default_executive ='telescope'
+	-- 			nmap <Leader>ss :<C-u>SessionSave<CR>
+	-- 			nmap <Leader>sl :<C-u>SessionLoad<CR>
+	-- 			nnoremap <silent> <Leader>dh :DashboardFindHistory<CR>
+	-- 			nnoremap <silent> <Leader>df :DashboardFindFile<CR>
+	-- 			nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+	-- 			nnoremap <silent> <Leader>da :DashboardFindWord<CR>
+	-- 			nnoremap <silent> <Leader>dm :DashboardJumpMark<CR>
+	-- 			nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+	-- 			" autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
+	-- 			let g:dashboard_custom_header = [
+	-- 				\'',
+	-- 				\'⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣤⣴⣦⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ',
+	-- 				\'⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⠿⠿⠿⠿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀ ',
+	-- 				\'⠀⠀⠀⠀⣠⣾⣿⣿⡿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⢿⣿⣿⣶⡀⠀⠀⠀⠀ ',
+	-- 				\'⠀⠀⠀⣴⣿⣿⠟⠁⠀⠀⠀⣶⣶⣶⣶⡆⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣦⠀⠀⠀ ',
+	-- 				\'⠀⠀⣼⣿⣿⠋⠀⠀⠀⠀⠀⠛⠛⢻⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣧⠀⠀ ',
+	-- 				\'⠀⢸⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⡇⠀ ',
+	-- 				\'⠀⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⠀ ',
+	-- 				\'⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⡟⢹⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⣹⣿⣿⠀ ',
+	-- 				\'⠀⣿⣿⣷⠀⠀⠀⠀⠀⠀⣰⣿⣿⠏⠀⠀⢻⣿⣿⡄⠀⠀⠀⠀⠀⠀⣿⣿⡿⠀ ',
+	-- 				\'⠀⢸⣿⣿⡆⠀⠀⠀⠀⣴⣿⡿⠃⠀⠀⠀⠈⢿⣿⣷⣤⣤⡆⠀⠀⣰⣿⣿⠇⠀ ',
+	-- 				\'⠀⠀⢻⣿⣿⣄⠀⠀⠾⠿⠿⠁⠀⠀⠀⠀⠀⠘⣿⣿⡿⠿⠛⠀⣰⣿⣿⡟⠀⠀ ',
+	-- 				\'⠀⠀⠀⠻⣿⣿⣧⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⠏⠀⠀⠀ ',
+	-- 				\'⠀⠀⠀⠀⠈⠻⣿⣿⣷⣤⣄⡀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⠟⠁⠀⠀⠀⠀ ',
+	-- 				\'⠀⠀⠀⠀⠀⠀⠈⠛⠿⣿⣿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⠿⠋⠁⠀⠀⠀⠀⠀⠀ ',
+	-- 				\'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠛⠛⠛⠛⠛⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ',
+	-- 				\]
+	--
+	-- 		]]
+	-- 			-- vim.g.dashboard_preview_command = 'cat'
+	-- 			-- vim.g.dashboard_preview_pipeline = 'lolcat'
+	-- 			-- vim.g.dashboard_preview_file = "~/.config/nvim/dashboard/cat.cat"
+	-- 			-- vim.g.dashboard_preview_file_height = 12
+	-- 			-- vim.g.dashboard_preview_file_width = 80
+	-- 	end,
+	-- }--}}}
 
         -- 诊断
         use {
                 "folke/trouble.nvim",--{{{
                 requires = {"kyazdani42/nvim-web-devicons",},
-                opt = true,
-                event = "InsertEnter",
+                -- opt = true,
+                -- event = "InsertEnter",
                 config = function()
                         require("trouble").setup {
                                 position = "bottom", -- position of the list can be: bottom, top, left, right
@@ -810,6 +810,20 @@ return packer.startup(function(use)--{{{
 		end
 	}--}}}
 
+	use {
+		'simrat39/symbols-outline.nvim',--{{{
+		config = function ()
+			require "packages.configs.ssymbols_outline"
+		end,
+		lock = true,
+	}--}}}
+
+	use {
+		'liuchengxu/vista.vim',--{{{
+		config = function ()
+			vim.g.vista_sidebar_width = 80
+		end
+	}--}}}
 
 --}}}
 
@@ -838,8 +852,8 @@ return packer.startup(function(use)--{{{
 
         use {
                 'numToStr/Comment.nvim',--{{{
-                opt = true,
-                event = "BufWinEnter",
+                -- opt = true,
+                -- event = "BufWinEnter",
                 config = function()
                         require('Comment').setup{
                                 ---Add a space b/w comment and the line
@@ -912,6 +926,10 @@ return packer.startup(function(use)--{{{
 	-- 		]]
 	-- 	end,
 	-- }--}}}
+	--
+	use {
+		'nyngwang/NeoZoom.lua',--{{{
+	}--}}}
 
 	-- }}}
 
@@ -975,8 +993,8 @@ return packer.startup(function(use)--{{{
 
         use {
                 'rcarriga/nvim-notify',--{{{
-                opt = true,
-                event = "BufWinEnter",
+                -- opt = true,
+                -- event = "BufWinEnter",
                 config = function()
                         require "packages.configs.snotify"
                 end
