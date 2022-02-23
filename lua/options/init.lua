@@ -65,5 +65,5 @@ g.neovide_no_idle = true
 g.neovide_fullscreen = true
 g.neovide_remember_window_siez = true
 g.neovide_input_use_logo = true
-g.neovide_cursor_animation_length = 0.29
+g.neovide_cursor_animation_length = 0.08
 g.neovide_cursor_vxf_mode = "railgun"

@@ -472,7 +472,7 @@ return packer.startup(function(use)--{{{
 				-- 	return true
 				-- end
 				-- end,
-				offsets = {{filetype = "NvimTree", text = "早点休息 🙄" , text_align = --[[ "left" | "center" |  ]]"right"}},
+				offsets = {{filetype = "NvimTree", text = "早些休息 😊" , text_align = --[[ "left" | "center" |  ]]"right"}},
 				show_buffer_icons = true , -- disable filetype icons for buffers
 				show_buffer_close_icons = true ,
 				show_close_icon = true ,
